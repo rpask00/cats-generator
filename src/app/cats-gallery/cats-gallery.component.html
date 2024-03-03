@@ -1,0 +1,114 @@
+<section class="container">
+  @if (loadedCats$ | async; as loadedCats) {
+    <div class="row">
+
+      @for (cat$ of loadedCats; track $index) {
+
+        @if (cat$ | async; as cat) {
+          <div [ngClass]="['col-md-' + cat.width, 'col-12', 'd-flex align-items-center py-3'] ">
+            <app-cat-element class="w-100" [cat]="cat"></app-cat-element>
+          </div>
+        } @else {
+          loading cat...
+        }
+      }
+    </div>
+  }
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-4">-->
+  <!--      <app-cat-element></app-cat-element>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+
+</section>
