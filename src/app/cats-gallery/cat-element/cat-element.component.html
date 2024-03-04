@@ -1,10 +1,18 @@
-@if (cat) {
-  <mat-card class="example-card">
-    <img mat-card-image  [src]="cat.image" alt="Photo of a Cat">
-    <mat-card-content>
-      <p>
-        {{ cat.funFact }}
+<mat-card class="h-100">
+  @if (catImage$ | async; as catImage) {
+    <img mat-card-image [src]="catImage" alt="Photo of a cute cat"/>
+
+    <mat-card-content class="p-3">
+      <p class="mat-subtitle-1">
+        Fun Fact #{{ index + 1 }}
+      </p>
+      <p class="mat-subtitle-2">
+        {{ funFact }}
       </p>
     </mat-card-content>
-  </mat-card>
-}
+  } @else {
+    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+</mat-card>

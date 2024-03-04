@@ -1,9 +1,11 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {CatsGalleryService} from "./cats-gallery.service";
 import {CatElementComponent} from "./cat-element/cat-element.component";
-import {debounceTime, filter, fromEvent, scan} from "rxjs";
+import {debounceTime, filter, forkJoin, fromEvent, map, Observable, scan, startWith, switchMap} from "rxjs";
 import {HttpClientModule} from "@angular/common/http";
 import {AsyncPipe, NgClass} from "@angular/common";
+import {MatCard} from "@angular/material/card";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 
 @Component({
@@ -13,7 +15,9 @@ import {AsyncPipe, NgClass} from "@angular/common";
     CatElementComponent,
     HttpClientModule,
     AsyncPipe,
-    NgClass
+    NgClass,
+    MatCard,
+    MatProgressSpinner
   ],
   templateUrl: './cats-gallery.component.html',
   styleUrl: './cats-gallery.component.scss',
@@ -21,12 +25,18 @@ import {AsyncPipe, NgClass} from "@angular/common";
 })
 export class CatsGalleryComponent implements OnInit {
 
-  readonly loadedCats$ = this._catsGalleryService.loadedCats$;
-
-  stream$ = fromEvent<MouseEvent>(this.elementRef.nativeElement.ownerDocument, 'scroll').pipe(
+  readonly scrollAtTheBottom$ = fromEvent<MouseEvent>(this.elementRef.nativeElement.ownerDocument, 'scroll').pipe(
     debounceTime(100),
-    filter((event) => !!event.view && (event.view.scrollY >= event.view.scrollMaxY - 100)),
-    scan((acc, event) => acc + 1, 0),
+    filter((event) => !!event.view && (event.view.scrollY >= event.view.scrollMaxY - 1000)))
+
+
+  readonly funFactsStream$ = this.scrollAtTheBottom$.pipe(
+    map(() => this._catsGalleryService.getFunFacts$(3)),
+    startWith(this._catsGalleryService.getFunFacts$(9)),
+    switchMap((funFacts: Observable<string>[]) => forkJoin(funFacts)),
+    scan((acc: string[], newFunFacts: string[]) => {
+      return acc.concat(newFunFacts.filter((newCat) => !acc.includes(newCat)))
+    }, []),
   )
 
   constructor(
@@ -37,23 +47,5 @@ export class CatsGalleryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._catsGalleryService.loadCats();
-    this._catsGalleryService.loadCats();
-    this._catsGalleryService.loadCats();
-    this._catsGalleryService.loadCats();
-    this._catsGalleryService.loadCats();
-    this._catsGalleryService.loadCats();
-
   }
-
-
-  private isScrollAtBottom(e: Event) {
-    return true
-  }
-
-  @HostListener('window:scroll') scrolling(event: MouseEvent) {
-    console.log(event)
-  }
-
-
 }
