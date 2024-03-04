@@ -22,17 +22,17 @@ export class CatsGalleryService {
   get funFact$(): Observable<string> {
     return this._http.get<{ data: string[] }>('https://meowfacts.herokuapp.com/')
       .pipe(
-        map(({data}) => data[0])
+        map(({data}) => data[0]),
       )
   }
 
   get catImage$(): Observable<string> {
     return this._http.get(
-      this.CAT_IMAGE_URL, {
+      this.BACKUP_IMAGE_URL, {
         responseType: 'arraybuffer',
       })
       .pipe(
-        timeout(1000),
+        timeout(100),
         catchError(() => {
           return this._http.get(this.BACKUP_IMAGE_URL, {
             responseType: 'arraybuffer',

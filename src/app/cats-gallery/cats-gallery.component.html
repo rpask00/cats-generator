@@ -10,4 +10,13 @@
       }
     </section>
   }
+
+  @if (streamCompleted$ | async) {
+    <section class="row">
+      <h1>That's all the fun facts for now.</h1>
+    </section>
+  } @else {
+    <div class="padding-bottom"></div>
+  }
+
 </section>

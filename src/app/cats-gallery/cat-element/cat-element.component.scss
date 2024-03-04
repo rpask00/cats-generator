@@ -1,15 +1,28 @@
 
 mat-card {
   background: #854836;
+  border-radius: 20px;
   min-height: 530px;
+  opacity: 0;
+  transform: translateX(100px);
+  //transition: all 0.5s;
+  animation: fadeIn 0.6s forwards;
 }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 
 mat-card-content p {
   font-family: "Madimi One", sans-serif;
   font-weight: 400;
   font-style: normal;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: white
 }
 
