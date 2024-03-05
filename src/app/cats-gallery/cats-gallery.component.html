@@ -12,8 +12,8 @@
   }
 
   @if (streamCompleted$ | async) {
-    <section class="row">
-      <h1>That's all the fun facts for now.</h1>
+    <section class="row m-0">
+      <h1 class="completion-message p-3">That's all the fun facts for now.</h1>
     </section>
   } @else {
     <div class="padding-bottom"></div>
