@@ -1,19 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {CatsGalleryService} from "./cats-gallery.service";
 import {CatElementComponent} from "./cat-element/cat-element.component";
-import {
-  combineLatest,
-  debounceTime,
-  filter,
-  first,
-  fromEvent,
-  map,
-  Observable,
-  scan,
-  startWith,
-  switchMap,
-  takeUntil
-} from "rxjs";
+import {combineLatest, debounceTime, filter, fromEvent, last, scan, startWith, switchMap, takeWhile} from "rxjs";
 import {HttpClientModule} from "@angular/common/http";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {MatCard} from "@angular/material/card";
@@ -44,23 +32,19 @@ export class CatsGalleryComponent implements OnInit {
 
   private readonly _funFactsStream$ = this._scrollAtTheBottom$.pipe(
     debounceTime(100),
-    map(() => this._catsGalleryService.getFunFacts$(3)),
-    switchMap((funFacts: Observable<string>[]) => combineLatest(funFacts)),
+    switchMap(() => combineLatest(this._catsGalleryService.getFunFacts$(3))),
     scan((acc: string[], newFunFacts: string[]) => {
       return acc.concat(newFunFacts.filter((newCat) => !acc.includes(newCat)).slice(0, 3))
     }, []),
   )
 
-  readonly streamCompleted$ = this._funFactsStream$.pipe(
-    filter((funFacts) => funFacts.length >= 20),
-    first()
-  )
-
-
   readonly funFactsStream$ = this._funFactsStream$.pipe(
-    takeUntil(this.streamCompleted$)
+    takeWhile((funFacts, index) => funFacts.length < 20 || index === 0, true),
   )
 
+  readonly streamCompleted$ = this.funFactsStream$.pipe(
+    last(),
+  );
 
   constructor(
     private elementRef: ElementRef,

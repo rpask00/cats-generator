@@ -6,8 +6,7 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class CatsGalleryService {
-
-  readonly CAT_IMAGE_URL = "https://cataas.com/cat?type=square";
+  readonly CAT_IMAGE_URL = "https://cataas.com/cat";
   readonly BACKUP_IMAGE_URL = "https://media.istockphoto.com/id/1361394182/photo/funny-british-shorthair-cat-portrait-looking-shocked-or-surprised.jpg?s=612x612&w=0&k=20&c=6yvVxdufrNvkmc50nCLCd8OFGhoJd6vPTNotl90L-vo=";
 
   constructor(
@@ -28,7 +27,7 @@ export class CatsGalleryService {
 
   get catImage$(): Observable<string> {
     return this._http.get(
-      this.BACKUP_IMAGE_URL, {
+      this.CAT_IMAGE_URL, {
         responseType: 'arraybuffer',
       })
       .pipe(
