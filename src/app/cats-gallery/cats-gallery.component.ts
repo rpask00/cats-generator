@@ -39,7 +39,7 @@ export class CatsGalleryComponent implements OnInit {
   )
 
   readonly funFactsStream$ = this._funFactsStream$.pipe(
-    takeWhile((funFacts, index) => funFacts.length < 20 || index === 0, true),
+    takeWhile((funFacts, index) => funFacts.length < 90 || index === 0, true),
   )
 
   readonly streamCompleted$ = this.funFactsStream$.pipe(
