@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-## Development server
+![image](https://github.com/rpask00/cats-generator/assets/33097890/062ec297-ad43-40b2-85d7-4b36906cecf0)
+
+
+![image](https://github.com/rpask00/cats-generator/assets/33097890/55110144-9137-43c4-8854-f0b621c66986)
+
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
@@ -16,7 +20,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng serve` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
