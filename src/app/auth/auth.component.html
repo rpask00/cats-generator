@@ -1,0 +1,23 @@
+<section class="container">
+
+  <section class="login-page d-flex row">
+    <section class="col-0 col-md-6"></section>
+    <section class="col-12 col-md-5">
+      <form class="d-flex flex-column" [formGroup]="form">
+        <h1 class="mat-headline-2">Sign in</h1>
+        <mat-form-field>
+          <mat-label>Login</mat-label>
+          <input formControlName="login" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput type="password">
+        </mat-form-field>
+
+        <button type="button" (click)="submit()" mat-raised-button color="primary">Enter</button>
+      </form>
+    </section>
+  </section>
+
+</section>
